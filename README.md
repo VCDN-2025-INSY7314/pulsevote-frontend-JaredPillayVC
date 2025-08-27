@@ -103,3 +103,7 @@ http://localhost:5000/test
 
 **Port conflict:**
 If 5173 is in use, Vite will prompt to use another port. Adjust backend CORS if needed.
+
+### SSL/TLS Research & Local HTTPS Setup (PulseVote)
+
+SSL/TLS is the cryptographic protocol that secures data in transit between clients and servers, giving us confidentiality, integrity, and server authenticity over HTTPS instead of plaintext HTTP. Modern browsers now call out non-HTTPS sites as “Not secure”, which nudges the whole web to adopt encryption by default and protects users from passive snooping and tampering on open networks.
