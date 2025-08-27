@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { cleanEmail, cleanPassword, isStrongEnough } from '../utils/sanitize';
+import { cleanEmail, cleanPassword } from '../utils/sanitize';
+import { isValidEmail, isStrongPassword } from '../utils/validators';
 import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
@@ -12,12 +13,20 @@ export default function Register() {
   async function onSubmit(e) {
     e.preventDefault();
     setMessage('');
-    const emailC = cleanEmail(email);
-    const passC = cleanPassword(password);
-    if (!isStrongEnough(passC)) {
-      setMessage('Password must be at least 8 characters.');
+    if (!email || !password) {
+      setMessage('Email and password are required.');
       return;
     }
+    if (!isValidEmail(email)) {
+      setMessage('Invalid email format.');
+      return;
+    }
+    if (!isStrongPassword(password)) {
+      setMessage('Password must be at least 8 characters long and include letters and numbers.');
+      return;
+    }
+    const emailC = cleanEmail(email);
+    const passC = cleanPassword(password);
     const ok = await register(emailC, passC);
     if (ok) nav('/dashboard', { replace: true });
   }

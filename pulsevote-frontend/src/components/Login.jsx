@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { cleanEmail, cleanPassword } from '../utils/sanitize';
+import { isValidEmail } from '../utils/validators';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Login() {
@@ -14,6 +15,14 @@ export default function Login() {
   async function onSubmit(e) {
     e.preventDefault();
     setMessage('');
+    if (!email || !password) {
+      setMessage('Email and password are required.');
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setMessage('Invalid email format.');
+      return;
+    }
     const ok = await login(cleanEmail(email), cleanPassword(password));
     if (ok) {
       const dest = loc.state?.from?.pathname || '/dashboard';
