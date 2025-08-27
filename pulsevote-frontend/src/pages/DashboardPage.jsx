@@ -20,7 +20,25 @@ export default function DashboardPage() {
     <div>
       <h2>Dashboard</h2>
       {err && <p style={{ color: 'crimson' }}>{err}</p>}
-      {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : <p>Loading…</p>}
+      {data ? (
+        <pre
+          style={{
+            background: '#f3f4f6',
+            color: '#222',
+            padding: '16px',
+            borderRadius: 8,
+            fontSize: 15,
+            overflowX: 'auto',
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+            margin: 0,
+            maxWidth: '100%',
+            boxSizing: 'border-box',
+          }}
+        >
+          {JSON.stringify(data, null, 2)}
+        </pre>
+      ) : <p>Loading…</p>}
     </div>
   );
 }
