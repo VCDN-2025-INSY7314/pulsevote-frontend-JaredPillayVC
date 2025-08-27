@@ -8,7 +8,7 @@ function App() {
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetch('http://localhost:5000/test');
+        const res = await fetch('https://localhost:5000/test');
         if (!res.ok) throw new Error('API error');
         const json = await res.json();
         setApi(json);
